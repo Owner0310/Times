@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>Times</title>
+    <link rel="icon" href="contents/favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+        <p>データを取得しています</p>
+    </div>
+
+    <!-- background -->
+    <div id="bg"></div>
+    <div id="bg-overlay"></div>
+
+    <!-- header -->
+    <header class="site-header">
+        <div class="brand"><a href="#" data-target="home"><h2>Times</h2></a></div>
+        <nav>
+            <a href="#" data-target="home" class="active">Home</a>
+            <a href="#" data-target="about">About</a>
+            <a href="#" data-target="clock">Clock</a>
+            <a href="#" data-target="alarm">Alarm</a>
+            <a href="#" data-target="stopwatch">Stopwatch</a>
+            <a href="#" data-target="timer">Timer</a>
+            <a href="#" data-target="terms">Terms</a>
+            <button id="open-settings" class="linklike" aria-haspopup="dialog">Settings</button>
+        </nav>
+    </header>
+
+    <!-- settings dialog -->
+    <dialog id="settings">
+        <form method="dialog" class="settings-form">
+            <h2>Settings</h2>
+
+            <fieldset>
+                <legend>背景</legend>
+                <label><input type="radio" name="bgSource" value="online" checked> オンライン（自動切替）</label>
+                <label><input type="radio" name="bgSource" value="local"> ローカル画像（アップロード）</label>
+                <div class="row">
+                    <label for="bgInterval">切替間隔（秒）</label>
+                    <input id="bgInterval" type="number" min="5" step="5" value="300" />
+                </div>
+                <div class="row">
+                    <label for="bgUpload">ローカル画像アップロード（複数可）</label>
+                    <input id="bgUpload" type="file" accept="image/*" multiple />
+                </div>
+                <div id="localImagesPreview" class="thumbs"></div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Font</legend>
+                <div class="row">
+                    <label for="fontPreset">プリセット</label>
+                    <select id="fontPreset">
+                        <option value="system-ui">System UI</option>
+                        <option value="noto">Noto Sans JP</option>
+                        <option value="inter">Inter</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="fontCustom">カスタム</label>
+                    <input id="fontCustom" type="text" placeholder='"Fira Sans", sans-serif' />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Reset</legend>
+                <button id="reset-btn">データリセット</button>
+            </fieldset>
+
+            <menu class="dialog-actions">
+                <button value="cancel" class="btn">キャンセル</button>
+                <button id="save-settings" value="default" class="btn">保存</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- pages -->
+    <main>
+        <!-- Home -->
+        <section id="home" class="page active center">
+            <h1>Times</h1>
+            <p>Timesとは？<br>Timesは管理者が遊び半分で作った、簡単に時間を管理するwebアプリです。<br>PC作業や勉強の際などにご利用ください。</p>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="page center">
+            <h2>About</h2>
+            <p>Timesは時計、タイマー、ストップウォッチ、アラームをひとまとめにしたWebアプリです。</p>
+        </section>
+
+        <!-- Clock -->
+        <section id="clock" class="page center">
+            <h2>Clock</h2>
+            <div id="clock-time" class="time-huge">00:00:00</div>
+            <div id="clock-date" class="date-sub">Monday, January 1, 2025</div>
+            <div id="world-clock"></div>
+        </section>
+
+        <!-- Alarm -->
+        <section id="alarm" class="page center">
+            <h2>Alarm</h2>
+            <p>※ アラーム機能は実装予定です。</p>
+        </section>
+
+        <!-- Stopwatch -->
+        <section id="stopwatch" class="page center">
+            <h2>Stopwatch</h2>
+            <div id="stopwatch-display" class="time-huge">00:00:00</div>
+            <button id="sw-start">Start</button>
+            <button id="sw-stop">Stop</button>
+            <button id="sw-reset">Reset</button>
+        </section>
+
+        <!-- Timer -->
+        <section id="timer" class="page center">
+            <h2>Timer</h2>
+            <input type="time" step="1" id="timer-input" />
+            <input type="text" id="timer-name" placeholder="名前" />
+            <textarea id="timer-desc" placeholder="説明"></textarea>
+            <button id="timer-set">セット</button>
+            <div id="timer-display" class="time-huge">00:00:00</div>
+            <ul id="timer-history"></ul>
+        </section>
+
+        <!-- Terms -->
+        <section id="terms" class="page center">
+            <h2>利用規約</h2>
+            <p>このサービスを利用する場合、利用規約に同意しているものとします。</p>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="site-footer">© 2025 Times All rights reserved.</footer>
+</body>
+</html>

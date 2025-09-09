@@ -1,0 +1,11 @@
+#clock-Time {
+  font-size: clamp(50px, 10vw, 160px);
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+#clock-Date {
+  font-size: clamp(20px, 3vw, 30px);
+  margin: 10px;
+  color: var(--muted);
+}

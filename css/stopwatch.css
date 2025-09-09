@@ -1,0 +1,5 @@
+#stopwatch-Time {
+  font-size: clamp(50px, 10vw, 160px);
+  margin: 10px;
+  letter-spacing: 1px;
+}

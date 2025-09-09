@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>Times</title>
+    <link rel="icon" href="contents/favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- 共通 -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
+    <!-- アプリ別 -->
+    <link rel="stylesheet" href="css/stopwatch.css" />
+    <script src="js/stopwatch.js" defer></script>
+</head>
+
+<body>
+    <!-- load -->
+    <div id="loader">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+    <p>データを取得しています</p>
+    </div>
+
+    <!-- background -->
+    <div id="bg"></div>
+    <div id="bg-overlay"></div>
+
+    <!-- header -->
+    <header class="site-header">
+        <div class="brand">
+            <a href="index.html" class="active"><h3>Times</h3></a>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="clock.html">Clock</a>
+            <a href="stopwatch.html" class="active">Stopwatch</a>
+            <a href="timer.html">Timer</a>
+            <a href="pomodoro.html">Pomodoro</a>
+            <button id="open-settings" class="settings" aria-haspopup="dialog">Settings</button>
+        </nav>
+    </header>
+
+    <!-- settings -->
+    <dialog id="settings">
+        <form method="dialog" class="settings-form">
+        <h2>Settings</h2>
+
+        <fieldset>
+            <legend>Background</legend>
+            <label class="row">
+                <input type="radio" name="bgSource" value="online" checked />
+                オンライン（自動切替）
+            </label>
+            <label class="row">
+                <input type="radio" name="bgSource" value="local" />
+                ローカル画像アップロード
+            </label>
+
+            <div class="row">
+            <label for="bgInterval">切替間隔（秒）</label>
+            <input id="bgInterval" type="number" min="5" step="5" value="300" />
+            </div>
+
+            <div class="row">
+            <label for="bgUpload">ローカル画像アップロード（複数可）</label>
+            <input id="bgUpload" type="file" accept="image/*" multiple />
+            </div>
+            <div id="localImagesPreview" class="thumbs"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Fonts</legend>
+            <div class="row">
+            <label for="fontPreset">プリセット</label>
+            <select id="fontPreset">
+                <option value="system-ui">System UI（推奨）</option>
+                <option value="noto">Noto Sans JP（Google Fonts）</option>
+                <option value="inter">Inter（Google Fonts）</option>
+            </select>
+            </div>
+            <div class="row">
+            <label for="fontCustom">カスタム（任意）</label>
+            <input id="fontCustom" type="text" placeholder="Fira Sans, Noto Sans JP, sans-serif" />
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Reset</legend>
+            <button class="btn" id="SettingsResetBtn">リセット</button>
+        </fieldset>
+
+        <menu class="dialog-actions">
+            <button value="cancel" class="btn">キャンセル</button>
+            <button id="save-settings" value="default" class="btn">保存して変更</button>
+        </menu>
+        </form>
+    </dialog>
+
+    <!-- contents -->
+    <main class="container">
+        <div class="card center">
+            <h2>Stopwatch</h2>
+            <h1 id="stopwatch-Time">00:00:00</h1>
+        </div>
+
+        <div class="card center">
+            <div class="actions">
+                <button id="stopwatch-Start/PauseBtn" class="btn">▶ 開始 / ⏸ 一時停止</button>
+                <button id="stopwatch-ResetBtn" class="btn">⟲ リセット</button>
+
+        <!-- 保存 -->
+            <div class="pomodoro-save-load">
+                <button id="pomodoro-SaveSettingsBtn" class="btn">保存</button>
+            </div>
+            </div>
+
+            <div class="settings-box">
+                <div>
+                    <label for="Stopwatch-Title">タイトル</label>
+                    <input type="text" id="stopwatch-Title" placeholder="例: 勉強" />
+                </div>
+                <div>
+                    <label for="stopwatch-Explanation">説明</label>
+                    <input type="text" id="stopwatch-Explanation" placeholder="例: 英語リーディング" />
+                </div>
+            </div>
+
+            <div id="pomodoro-SavedSettingsCards" class="settings-container">
+                <!-- 保存済み設定カードがここに動的に追加されます -->
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="site-footer">© 2025 Times All rights reserved.</footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+#pomodoro-display {
+  font-size: clamp(48px, 12vw, 120px);
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+#pomodoro-phase {
+  font-size: 24px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.settings-box {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+  justify-content: center;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.settings-box label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.settings-box input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.25);
+  color: var(--text);
+}
+
+#pomodoro-DisplayWorkStatus {
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+
+
+label {
+  left: 40%;
+}
+
+
+
+
+
+.settings-card-compact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0f0f0;
+    margin: 4px 0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.settings-card-compact .title {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.settings-card-compact .times {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.settings-card-compact button {
+    margin-left: 4px;
+    font-size: 12px;
+    padding: 2px 6px;
+}

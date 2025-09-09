@@ -1,0 +1,536 @@
+:root{
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+  --glass: rgba(0,0,0,.35);
+  --glass-strong: rgba(0,0,0,.5);
+  --text: #fff;
+  --muted: rgba(255,255,255,.8);
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* タイトル・クロック */
+h1 {
+  font-size: clamp(50px, 10vw, 150px);
+  margin: 0px;
+  letter-spacing: 1px;
+}
+
+/* サブタイトル */
+h2 {
+  font-size: clamp(50px, 10vw, 60px);
+  margin: 0px;
+  letter-spacing: 1px;
+}
+
+/* ヘッダータイトル */
+h3 {
+  font-size: 30px;
+  margin: 0px;
+  letter-spacing: 1px;
+}
+
+/* 見出し */
+h4 {
+  font-size: 50px;
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+/* 強調 */
+h5 {
+  font-size: 30px;
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+/* 強調 */
+h6 {
+  font-size: 20px;
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+/* 本文 */
+p {
+  font-size: 15px;
+  margin: 10px;
+  letter-spacing: 1px;
+}
+
+/* リンク */
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* ボタン */
+input[type="button"],
+input[type="number"],
+input[type="reset"],
+input[type="time"],
+.btn {
+  margin: 5px;
+  width: 180px;
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.16);
+  background: transparent;
+  border-color: rgba(255,255,255,.3);
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.25);
+  transition: transform .05s ease, background .2s ease;
+}
+
+/* ボタン（ホバー） */
+input[type="time"]:hover,
+.btn:hover {
+  background: rgba(255,255,255,.22);
+}
+
+/* ボタン（押下） */
+.btn:active {
+  transform: translateY(1px);
+}
+.btn {
+}
+
+
+
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+body{
+  scroll-behavior: smooth;
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: #0b0e13;
+  overflow: auto;
+}
+
+
+
+
+.container{
+  position: relative;
+  z-index: 1;
+  padding: 100px 16px 80px;
+  width: min(960px, 100%);
+  margin: 0 auto;
+}
+
+.card{
+  margin: 30px;
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.card.translucent{ background: rgba(0,0,0,.28); }
+
+.center{ text-align: center; }
+
+.actions{ margin-top: 16px; }
+
+
+
+
+/* Timer */
+.grid2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.grid2 label{ display: flex; flex-direction: column; text-align: left; gap: 6px; }
+.grid2 input[type="time"],
+.grid2 input[type="text"],
+.grid2 input[type="number"]{
+  padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.25); color: var(--text);
+}
+.row-end{ display: flex; align-items: end; justify-content: end; }
+.current-timer{ margin: 20px 0; }
+.time-big{ font-size: clamp(32px, 6vw, 64px); font-weight: 400; }
+
+/* History */
+.history{
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 10px;
+}
+.history li{
+  background: rgba(0,0,0,.26);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 10px 12px; border-radius: 12px;
+  display: grid; gap: 6px;
+}
+.history .row{
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+}
+.history .pill{
+  font-size: 12px; padding: 2px 8px; border-radius: 999px;
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.2);
+}
+
+/* Footer */
+.site-footer{
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 40px; display: flex; align-items: center; justify-content: center;
+  background: var(--glass); backdrop-filter: blur(6px);
+  z-index: 2;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ===============
+    ロード画面
+=============== */
+
+
+/* ロード画面全体 */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #fff;
+  font-size: 18px;
+  font-family: var(--font);
+}
+
+/* ロード画面サークル */
+#loader .spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ===============
+    背景
+=============== */
+
+/* 背景 */
+#bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  transition: opacity .6s ease, background-image 1s ease;
+  opacity: 1;
+}
+
+  .history {
+  gap: 8px; flex-wrap: wrap; align-items: center;
+}
+/* 背景フェード */
+#bg.fade {
+  opacity: 0;
+}
+
+/* 背景オーバーレイ */
+#bg-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 80% 10%, rgba(0,0,0,.15), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.35));
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ===============
+    ヘッダー
+=============== */
+
+/* ヘッダー */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+/* ページ名 */
+.title {
+  font-weight: 600; letter-spacing:.3px;
+}
+
+/* リンク */
+nav a,
+.settings {
+  color: var(--text);
+  text-decoration: none;
+  margin: 0 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background .2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* アクティブリンク・ホバー */
+nav a.active,
+nav a:hover,
+.settings:hover {
+  background: rgba(255,255,255,.12);
+}
+
+
+/* 設定画面 */
+
+/* ダイアログ */
+dialog#settings {
+  border: none;
+  padding: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(20,20,24,.95);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  width: min(720px, 92vw);
+}
+
+/* 設定フォーム部分 */
+.settings-form {
+  padding: 18px;
+}
+/* 設定フォームタイトル */
+.settings-form h2 {
+  margin: 4px 4px 12px;
+  font-weight: 600;
+}
+
+/* グループ */
+fieldset {
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+/* グループタイトル */
+legend {
+  padding: 0 6px;
+}
+
+/* 行ごとに設定 */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+/* inputのnumberの上下の矢印消す(Firefox向け) */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* inputのnumberの上下の矢印消す(Chrome, Safari, Edge向け) */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 入力 */
+input[type="text"],
+input[type="number"],
+input[type="time"],
+select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.25);
+  color: var(--text);
+}
+
+/* プレビュー */
+.thumbs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* プレビュー(画像) */
+.thumbs img {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+}
+
+/* 設定の変更実行 */
+.dialog-actions {
+  display: flex; justify-content: flex-end; gap: 8px; padding-top: 6px;
+}
+/* 小サイズ用 */
+@media (max-width: 720px) {
+  .grid2{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+#welcome-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;  /* 縦方向中央 */
+  align-items: center;      /* 横方向中央 */
+  z-index: 9999;
+}
+
+/* タイトル・説明・ボタンをまとめたコンテナ */
+#welcome-modal .welcome-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* タイトルと説明とボタンの間隔 */
+}
+
+#welcome-modal h1 {
+  font-size: clamp(48px, 10vw, 120px);
+  margin: 0;
+  font-weight: 700;
+}
+
+#welcome-modal p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+#welcome-modal .welcome-content button {
+  width: 150px;            /* 幅を固定 */
+  margin: 0 auto;           /* 横方向中央 */
+  padding: 12px 0;          /* 上下の余白だけに */
+  border-radius: 12px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#welcome-modal .welcome-content button:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+
+
+
+.center { text-align: center; }
+.actions { margin-top: 20px; }
+.btn { display: inline-block; padding: 10px 18px; border-radius: 12px; background: rgba(255,255,255,.16); color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,.25); }
+.btn:hover { background: rgba(255,255,255,.22); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* settings dialog 全体 */
+dialog#settings {
+  border: none;
+  border-radius: 16px;
+  background: rgba(20,20,24,.95);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  width: min(720px, 92vw);
+  max-height: 90vh;        /* 画面高さの90%まで */
+  overflow: hidden;        /* dialog自体ははみ出さない */
+}
+
+/* 内部コンテンツをスクロール可能にする */
+.settings-form {
+  padding: 18px;
+  max-height: 80vh;        /* dialog 内部のスクロール領域 */
+  overflow-y: auto;        /* 縦スクロール */
+}
+
+/* スクロール時にスクロールバーを見やすく（任意） */
+.settings-form::-webkit-scrollbar {
+  width: 8px;
+}
+.settings-form::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+}
+
+
+
+/* 縦画面警告 */
+@media (orientation: portrait) and (max-width: 768px) {
+
+  /* ページコンテンツを非表示 */
+  body > * {
+    display: none;
+  }
+
+  /* 警告メッセージ表示 */
+  body::before {
+    content: "画面を横向きにしてご覧ください";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    background: #000;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+  }
+}
